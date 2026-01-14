@@ -87,5 +87,17 @@ public class Main {
 
 
 // 4
+        List<Order> filteredOrders = orders.stream()
+                .filter(order -> order.getCustomer().getTier() == 2 &&
+                        order.getOrderDate().isBefore(LocalDate.of(2021, 04, 01)) &&
+                        order.getOrderDate().isAfter(LocalDate.of(2021, 02, 01)))
+                .toList();
+
+        List<Product> orderedProducts = new ArrayList<>();
+
+        for (Order order : filteredOrders) {
+            orderedProducts.addAll(order.getProducts());
+        }
+        System.out.println(orderedProducts);
     }
 }
