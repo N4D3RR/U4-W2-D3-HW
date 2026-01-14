@@ -62,7 +62,7 @@ public class Main {
 
 // 1
         List<Product> booksOver100 = products.stream()
-                .filter(product -> Objects.equals(product.getCategory(), "Books"))
+                .filter(product -> product.getCategory() == "Books")
                 .filter(product -> product.getPrice() > 100)
                 .toList();
 
@@ -70,14 +70,20 @@ public class Main {
         // .forEach(System.out::println);
 
 // 2
-        List<Order> ordersContainingBaby = orders.stream().filter(order ->
+        List<Order> ordersContainingBaby = orders.stream()
+                .filter(order ->
                         order.getProducts().stream()
                                 .anyMatch(product -> Objects.equals(product.getCategory(), "Baby")))
                 .toList();
         ordersContainingBaby.forEach(order -> System.out.println(order));
 
-
 // 3
+        List<Product> boysProductMinusTen = products.stream()
+                .filter(product -> Objects.equals(product.getCategory(), "Boys"))
+                .map(product -> new Product(product.getId(), product.getName(), product.getCategory(), product.getPrice() * 0.9))
+                .toList();
+
+        boysProductMinusTen.forEach(product -> System.out.println(product));
 
 
 // 4
